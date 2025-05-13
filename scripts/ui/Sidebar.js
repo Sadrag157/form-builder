@@ -8,8 +8,7 @@ class Sidebar {
         this.render();
     }
     render() {
-        this.element.innerHTML = this.fields
-            .map(field => `
+        this.element.innerHTML = this.fields.map(field => `
                 <div 
                     class="sidebar-item" 
                     data-types="${field.type}"
@@ -17,8 +16,7 @@ class Sidebar {
                 >
                     ${field.label}
                 </div>
-            `)
-            .join('');
+            `).join('');
         
         document.querySelectorAll('.sidebar-item').forEach(item => {
             item.addEventListener('dragstart', (e) => {

@@ -1,22 +1,34 @@
 class Canvas {
     constructor() {
-        this.element = document.getElementById('canvas');
+        this.dropZone = document.getElementById('dropZone');
         this.fields = [];
-        this.setupDragAndDrop();
+        this.setupDropZone();
     }
 
-    addField(field) {
+    addField(fieldType){
+        const field = new Field(fieldType, {label: `Field ${this.fields.length + 1}`})
         this.fields.push(field);
-        this.element.appendChild(field.render());
+        this.dropZone.appendChild(field.render());
     }
 
-    setupDragAndDrop() {
-        this.element.addEventListener('dragover', e => e.preventDefault());
-        this.element.addEventListener('drop', e => {
+    setupDropZone() {
+        this.dropZone.addEventListener('dragover', (e) => {
             e.preventDefault();
-            const type = e.dataTransfer.getData('text/plain');
-            this.addField(new Field(type, {label: `Field ${this.field.length + 1}`}));
+            this.dropZone.classList.add('highlight')
+        });
+
+        this.dropZone.addEventListener('dragleave', () => {
+            this.dropZone.classList('highight');
         })
+
+        this.dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            this.dropZone.classList.remove('highlight');
+            const fieldType = e.dataTransfer.getData('text/plain');
+            if(fieldType){
+                this.addField(fieldType);
+            }
+        });
     }
 }
 

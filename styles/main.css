@@ -2,12 +2,12 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    color:white;
+    background: #33394b;
 }
 
 .app {
     display: flex;
-    height: 100vh
+    height: 100vh;
 }
 
 .sidebar {
@@ -17,8 +17,37 @@ body {
     border-right:1px solid #000000;
 }
 
-.canvas {
-    flex: 1;
-    padding: 20px;
+.sidebar-item {
+    padding: 10px;
+    margin: 5px 0;
+    background: grey;
+    cursor: grab;
+    border-radius: 4px;
+}
+
+.sidebar-item:active {
+    cursor: grabbing;
+}
+
+.field {
+    margin: 10px;
+    padding: 10px;
+    border: 1px dashed #cccccc;
+}
+
+.drop-zone {
+    justify-content: center;
+    border: 2px dashed #aaaaaa;
+    margin:20px;
     background: #33394b;
+    color: #666666;
+    font-size: 18px;
+    text-align: center;
+    width: 30%;
+    height: 20%;
+}
+
+.drop-zone.highlight {
+    border-color: #4CAF50;
+    background: #262e27;
 }
