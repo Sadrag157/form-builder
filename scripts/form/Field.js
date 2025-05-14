@@ -4,6 +4,10 @@ class Field {
         this.label = options.label || '';
     }
 
+    removeField(button){
+        button.parentElement.remove();
+    }
+
     render() {
         const field = document.createElement('div');
         field.className = 'field';
@@ -13,8 +17,12 @@ class Field {
         else{
             field.innerHTML = `
                 <label>${this.label}</label>
-                <input type="${this.type}" placeholder="">
+                <input type="${this.type}" placeholder="Option">
+                <button class="removeButton"onclick="removeField(this)">✕</button>
             `;
+
+            const removeBtn = field.querySelector('.removeButton')
+            removeBtn.addEventListener('click', () => this.removeField(removeBtn));
         }
         return field;
     }
