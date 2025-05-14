@@ -3,15 +3,18 @@ body {
     margin: 0;
     padding: 0;
     background: #33394b;
+    overflow-y: auto;
 }
 
 .app {
     display: flex;
     height: 100vh;
+    flex-direction: row;
 }
 
 .sidebar {
     width:100px;
+    height: 100%;
     background:#25283b;
     padding: 100px;
     border-right:1px solid #000000;
@@ -30,24 +33,82 @@ body {
 }
 
 .field {
-    margin: 10px;
-    padding: 10px;
-    border: 1px dashed #cccccc;
+    position: relative;
+    margin-top: 16px;
+    width: 80%;
+}
+
+.field input{
+    width: 100%;
+    padding: 16px 12px 8px;
+    font-size: 16px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    color: #fff;
+    outline: none
+}
+
+.field label{
+    position: absolute;
+    left: 12px;
+    top:16px;
+    font-size:16px;
+    color:#aaa;
+    pointer-events: none;
+    transition:0.5s ease all;
+}
+
+.field input:focus +label,
+.field input:not(:placeholder-shown) + label{
+    top: 4px;
+    font-size:12px;
+    color:#6aa0ff;
+}
+
+.field input:focus{
+    border-bottom:2px solid #6aa0ff;
 }
 
 .drop-zone {
-    justify-content: center;
-    border: 2px dashed #aaaaaa;
+    display: flex;
+    justify-content:flex-start;
+    align-items: flex-start;
+    border: 2px solid #aaaaaa;
     margin:20px;
-    background: #33394b;
+    background: rgb(59, 66, 85);
     color: #666666;
     font-size: 18px;
     text-align: center;
-    width: 30%;
-    height: 20%;
+    width: 60%;
+    flex-direction: column;
+    min-height: 150px;
+    max-height: 5000px;
+    gap:5px;
+    overflow-y: auto;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-35%, -60%);
+    border-radius: 2%;
 }
 
 .drop-zone.highlight {
     border-color: #4CAF50;
     background: #262e27;
+}
+
+#placeholderText{
+    align-items: center;
+    width:100%;
+}
+
+#nameText{
+    font-size: 36px;
+    position:relative;
+    transform: translate(400%, -0%);
+    color:white;
+    align-items: center;
+    justify-content: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
