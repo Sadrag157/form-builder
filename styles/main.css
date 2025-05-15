@@ -1,14 +1,14 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
     background: #33394b;
-    overflow-y: auto;
+    overflow: visible;
+    overflow-x:hidden;
+    margin:0;
+    padding:0;
 }
 
 .app {
     display: flex;
-    height: 100vh;
     flex-direction: row;
 }
 
@@ -70,6 +70,15 @@ body {
     border-bottom:2px solid #6aa0ff;
 }
 
+.form-area{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    padding: 20px;
+    gap:20px;
+    width:100%;
+}
+
 .removeButton{
     position: absolute;
     top:10px;
@@ -90,23 +99,30 @@ body {
     display: flex;
     justify-content:flex-start;
     align-items: flex-start;
-    border: 2px solid #aaaaaa;
+    flex-direction: column;
+    text-align: center;
+
+    max-width:600px;
+    min-height: 100px;
+    width: 60%;
     margin:20px;
+    padding: 10px;
+    transition: all 0.3s ease;
+    padding-top: 40px;
+
+    border: 2px solid #aaaaaa;
     background: rgb(59, 66, 85);
+    border-radius: 8px;
+    
     color: #666666;
     font-size: 18px;
-    text-align: center;
-    width: 60%;
-    flex-direction: column;
-    min-height: 150px;
-    max-height: 5000px;
     gap:5px;
-    overflow-y: auto;
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform: translate(-35%, -60%);
-    border-radius: 1%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+
+    position:relative;
+    top:50px;
+
+    height:auto;
 }
 
 .drop-zone.highlight {
@@ -114,9 +130,10 @@ body {
     background: #262e27;
 }
 
-#placeholderText{
-    align-items: center;
-    width:100%;
+.placeholderText{
+    width: 100%;
+    color:#999;
+    font-style:italic;
 }
 
 #nameText{
@@ -126,4 +143,19 @@ body {
     align-items: center;
     justify-content: center;
     font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.removeZoneButton{
+    background: none;
+    border:none;
+    cursor:pointer;
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    font-size: 18px;
+    color:#aaa;
+}
+
+.removeZoneButton:hover{
+    color:#ff6a6a
 }

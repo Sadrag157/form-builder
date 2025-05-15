@@ -6,16 +6,15 @@
     <title>Form Builder</title>
     <link rel="stylesheet" href="./styles/main.css">
 </head>
+<body>
     <div class="app">
-        <div class="sidebar" id="sidebar"></div>
+        <div class="sidebar" id="sidebar">
+            <button id="addFormZoneButton">Add form zone</button>
             <p id="nameText">Form builder</p>
-        <div class="drop-zone" id ="dropZone">
-            <p id="placeholderText">Drag elements here</p>
+            <div id="sidebarItemsContainer"></div>
         </div>
+        <div class="form-area" id="formArea"></div>
     </div>
-    <script src="./scripts/ui/Sidebar.js"></script>
-    <script src="./scripts/ui/Canvas.js"></script>
-    <script src="./scripts/form/Field.js"></script>
-    <script src="./scripts/app.js"></script>
+    <script type="module" src="./scripts/app.js"></script>
 </body>
 </html>

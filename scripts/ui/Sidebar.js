@@ -1,17 +1,20 @@
 class Sidebar {
     constructor() {
-        this.element = document.getElementById('sidebar')
+        this.itemsContainer=document.getElementById('sidebarItemsContainer');
+        if(!this.itemsContainer){
+            console.error("Container for sidebar's elements not found!")
+            return;
+        }
         this.fields = [
             { type: 'text', label: 'Text box' },
-            {type: 'button', label: 'Button'}
         ];
         this.render();
     }
     render() {
-        this.element.innerHTML = this.fields.map(field => `
+        this.itemsContainer.innerHTML = this.fields.map(field => `
                 <div 
                     class="sidebar-item" 
-                    data-types="${field.type}"
+                    data-type="${field.type}"
                     draggable="true"
                 >
                     ${field.label}
@@ -26,4 +29,4 @@ class Sidebar {
     }
 }
 
-new Sidebar();
+export default Sidebar;
