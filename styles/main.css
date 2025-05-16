@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: #33394b;
     overflow: visible;
     overflow-x:hidden;
@@ -13,70 +13,158 @@ body {
 }
 
 .sidebar {
-    width:100px;
-    height: 100%;
-    background:#25283b;
-    padding: 100px;
-    border-right:1px solid #000000;
+    width:260px;
+    height: 100vh;
+    position: fixed;
+    top:0;
+    left:0;
+    background:#2c3e50;
+    color:#ecf0f1;
+    padding: 20px;
+    display:flex;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.sidebar-title{
+    font-size:24px;
+    font-weight: 600;
+    margin: 0 0 20px 0;
+    text-align: center;
+    color:#ffffff;
+}
+
+.sidebar-controls{
+    margin-bottom: 20px;
+    display:flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+.sidebar-button{
+    background-color: #3498db;
+    color:white;
+    border:none;
+    padding:12px 15px;
+    text-align:center;
+    text-decoration:none;
+    display:inline-block;
+    font-size:16px;
+    font-weight: 500;
+    border-radius:5px;
+    cursor:pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.sidebar-button:hover{
+    background-color: #2980b9;
+}
+
+.sidebar-button:active{
+    background-color: #2573a7;
+    transform: translateY(1px);
+}
+
+.sidebar-separator{
+    height: 1px;
+    background-color: #3e5771;
+    margin: 15px 0;
 }
 
 .sidebar-item {
-    padding: 10px;
-    margin: 5px 0;
-    background: grey;
+    padding: 12px 15px;
+    margin: 8px 0;
+    background: #34495e;
+    color:#ecf0f1;
     cursor: grab;
-    border-radius: 4px;
+    border-radius: 5px;
+    font-size:15px;
+    transition: background-color 0.2s ease;
+}
+
+.sidebar-item:hover{
+    background: #415b76;
 }
 
 .sidebar-item:active {
     cursor: grabbing;
+    background: #2c3e50;
 }
 
 .field {
     position: relative;
-    margin-top: 16px;
-    width: 80%;
+    width: 90%;
+    margin: 0 auto;
+    background-color: transparent;
+    padding: 15px 0;
+    border-radius:0;
+    box-shadow: none;
 }
 
 .field input{
-    width: 100%;
-    padding: 16px 12px 8px;
-    font-size: 16px;
+    width: calc(100% - 24px);
+    padding: 16px 0 8px 0;
+    font-size:16px;
     background-color: transparent;
-    border: none;
-    border-bottom: 2px solid #ccc;
-    color: #fff;
-    outline: none
+    border:none;
+    border-bottom: 2px solid #bdc3c7;
+    color: #bdc3c7;
+    outline:none;
+    box-sizing: border-box;
 }
 
 .field label{
     position: absolute;
-    left: 12px;
-    top:16px;
+    left: 20px;
+    top:36px;
     font-size:16px;
-    color:#aaa;
+    color:#7f8c8d;
     pointer-events: none;
     transition:0.5s ease all;
 }
 
 .field input:focus +label,
 .field input:not(:placeholder-shown) + label{
-    top: 4px;
+    top: 12px;
     font-size:12px;
-    color:#6aa0ff;
+    color:#3498db;
 }
 
 .field input:focus{
-    border-bottom:2px solid #6aa0ff;
+    border-bottom:2px solid #3498db;
 }
 
 .form-area{
+    margin-left: 260px;
+    padding: 30px 20px;
+    width: calc(100% - 260px);
+    box-sizing: border-box;
     display:flex;
     flex-direction: column;
-    align-items:center;
-    padding: 20px;
-    gap:20px;
+    align-items: center;
+    gap:25px;
+}
+
+.form-title-container {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0 20px;
+}
+
+.form-title-input{
+    font-size:32px;
+    font-weight: 600;
+    border:none;
+    outline:none;
+    background:transparent;
+    color:white;
+    text-align: center;
     width:100%;
+    max-width:800px;
+    padding:10px 20px;
+    border-bottom: 2px solid rgba(255,255,255,0.2);
 }
 
 .removeButton{
@@ -85,44 +173,45 @@ body {
     right:8px;
     background: none;
     border:none;
-    font-size: 16px;
-    color:#aaa;
+    font-size: 20px;
+    color:#95a5a6;
     cursor: pointer;
-    padding:0;
+    padding:5px;
+    line-height: 1;
+    border-radius: 50%;
+    transition: color 0.2s ease, background-color 0.2s ease
 }
 
 .removeButton:hover{
     color:#ff6a6a;
+    background-color: #f1f1f1;
 }
 
 .drop-zone {
     display: flex;
-    justify-content:flex-start;
-    align-items: flex-start;
     flex-direction: column;
     text-align: center;
 
-    max-width:600px;
-    min-height: 100px;
-    width: 60%;
-    margin:20px;
-    padding: 10px;
+    max-width:768px;
+    width: 100%;
+    min-height: 150px;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right:auto;
+    padding: 25px;
+    padding-top: 50px;
     transition: all 0.3s ease;
-    padding-top: 40px;
 
-    border: 2px solid #aaaaaa;
+    border: 1px solid #dadce0;
     background: rgb(59, 66, 85);
     border-radius: 8px;
     
-    color: #666666;
-    font-size: 18px;
-    gap:5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    color: #3c4043;
+    font-size: 16px;
+    gap:20px;
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
 
     position:relative;
-    top:50px;
-
-    height:auto;
 }
 
 .drop-zone.highlight {
@@ -132,17 +221,9 @@ body {
 
 .placeholderText{
     width: 100%;
-    color:#999;
+    color:#95a5a6;
     font-style:italic;
-}
-
-#nameText{
-    font-size: 36px;
-    position:relative;
-    color:white;
-    align-items: center;
-    justify-content: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    user-select: none;
 }
 
 .removeZoneButton{
@@ -150,12 +231,29 @@ body {
     border:none;
     cursor:pointer;
     position: absolute;
-    top: 5px;
-    right: 8px;
-    font-size: 18px;
-    color:#aaa;
+    top: 10px;
+    right: 10px;
+    font-size: 22px;
+    color:#95a5a6;
+    padding: 5px;
+    line-height: 1;
+    border-radius: 50%;
+    transition: color 0.2s ease, background-color 0.2s ease;
 }
 
 .removeZoneButton:hover{
-    color:#ff6a6a
+    color:#c0392b;
+}
+
+.question-title{
+    font-size:18px;
+    font-weight: 500;
+    border:none;
+    outline:none;
+    background: transparent;
+    color:white;
+    margin-bottom: 15px;
+    border-bottom:1px solid rgba(255,255,255,0.2);
+    padding-bottom:5px;
+    width:100%;
 }

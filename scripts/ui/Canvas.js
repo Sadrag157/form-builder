@@ -24,6 +24,12 @@ class Canvas {
         const dropZone = document.createElement('div');
         dropZone.className='drop-zone';
 
+        const questionInput=document.createElement('input');
+        questionInput.type='text';
+        questionInput.placeholder='Question title';
+        questionInput.className='question-title';
+        dropZone.appendChild(questionInput);
+
         const placeholder=document.createElement('p');
         placeholder.textContent='Drag elements here';
         placeholder.className='placeholderText';

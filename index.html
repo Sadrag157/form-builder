@@ -9,11 +9,18 @@
 <body>
     <div class="app">
         <div class="sidebar" id="sidebar">
-            <button id="addFormZoneButton">Add form zone</button>
-            <p id="nameText">Form builder</p>
-            <div id="sidebarItemsContainer"></div>
+            <h1 class="sidebar-title" id="nameText">Form builder</h1>
+            <div class="sidebar-controls">
+                <button id="addFormZoneButton" class="sidebar-button">Add form zone</button>
+            </div>
+            <div class="sidebar-separator"></div>
+            <div id="sidebarItemsContainer" class="sidebar-items-list"></div>
         </div>
-        <div class="form-area" id="formArea"></div>
+        <div class="form-area" id="formArea">
+            <div class="form-title-container">
+                <input type="text" placeholder="Untitled form" class="form-title-input"/>
+            </div>
+        </div>
     </div>
     <script type="module" src="./scripts/app.js"></script>
 </body>
