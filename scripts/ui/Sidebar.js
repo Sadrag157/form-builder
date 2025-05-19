@@ -6,7 +6,7 @@ class Sidebar {
             return;
         }
         this.fields = [
-            { type: 'text', label: 'Text box' },
+            {type:'radio', label:'Multiple Choice'},
         ];
         this.render();
     }

@@ -20,6 +20,75 @@ class Canvas {
         }
     }
 
+    saveForm(){
+        const formTitleInput=document.querySelector('.form-title-input');
+        const formTitle=formTitleInput?formTitleInput.value:'Untitled Form';
+
+        const formStructure={
+            title: formTitle,
+            zones:[]
+        }
+
+        const dropZones=this.formArea.querySelectorAll('.drop-zone');
+        dropZones.forEach(dropZone=>{
+            const questionInput=dropZone.querySelector('.question-title');
+            const questionTitle=questionInput?questionInput.value:'Untitled Question';
+
+            const zoneData={
+                question: questionTitle,
+                fields:[]
+            }
+
+            const fields=dropZone.querySelectorAll('.field')
+            fields.forEach(fieldElement=>{
+                const fieldType=fieldElement.dataset.fieldType;
+
+                if(fieldType==='radio'){
+                    const options=[];
+                    const optionElements=fieldElement.querySelectorAll('.option-item');
+                    optionElements.forEach(optionElement=>{
+                        const textInput = optionElement.querySelector('.option-text-input');
+                        const radioInput = optionElement.querySelector('input[type="radio"]')
+                        if(textInput && radioInput){
+                            options.push({
+                                id: radioInput.value,
+                                text: textInput.value,
+                                value: radioInput.value,
+                                isCorrect: radioInput.checked
+                            });
+                        }
+                    });
+
+                    const fieldData={
+                        type:'radio',
+                        options: options
+                    };
+
+                    if(options.some(opt=> opt.text.trim() !== '')){
+                        zoneData.fields.push(fieldData);
+                    }else if (options.length===0){
+                        console.warn(`Radio field in zone "${questionTitle}" has no options and will not be saved.`)
+                    }else{
+                        console.warn(`Radio field in zone "${questionTitle}" has options with empty text and will be saved`);
+                        zoneData.fields.push(fielddata);
+                    }
+                }
+            });
+            if(zoneData.fields.length>0){
+                formStructure.zones.push(zoneData);
+            }else{
+                console.warn(`Zone "${questionTitle}" has no fields and will not be saved`)
+            }
+        });
+
+        try{
+            localStorage.setItem('savedFormData', JSON.stringify(formStructure));
+            console.log('Form saved successfully:', formStructure);
+        }catch(e){
+            console.error('Error saving form to localStorage', e);
+        }
+    }
+
     addFormZone(){
         const dropZone = document.createElement('div');
         dropZone.className='drop-zone';
@@ -65,22 +134,31 @@ class Canvas {
             dropZone.classList.remove('highlight');
             const fieldType=e.dataTransfer.getData('text/plain');
             if(fieldType){
-                const label = '';
-                const fieldInstance = new Field(fieldType, {label: label});
+                let fieldInstance;
+                if(fieldType==='radio') {
+                    fieldInstance=new Field('radio', {
+                        options: [{id: Date.now(), text: ''}]
+                    });
+                }else{
+                    console.warn('Unknown field type dropped: ', fieldType);
+                    return;
+                }
 
-                currentZoneFields.push(fieldInstance);
+                if(fieldInstance){
+                    const fieldRenderedElement = fieldInstance.render();
+                    const placeholder = dropZone.querySelector('.placeholderText');
+                    if(placeholder){
+                        dropZone.insertBefore(fieldRenderedElement, placeholder);
+                        placeholder.style.display='none';
+                    }else{
+                        dropZone.appendChild(fieldRenderedElement);
+                    }
 
-                const fieldRenderedElement=fieldInstance.render();
-                dropZone.appendChild(fieldRenderedElement);
-
-                if(placeholder){
-                    placeholder.style.display='none';
                 }
             }
         });
 
         this.formArea.appendChild(dropZone);
-        this.formZones.push({dropZone:dropZone, fields:currentZoneFields});
     }
 }
 

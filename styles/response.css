@@ -1,0 +1,235 @@
+.response-page-body{
+    background: #33394b;
+    color:#ecf0f1;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin:0;
+    padding:20px;
+    display:flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+.response-container{
+    width:100%;
+    max-width:800px;
+    padding:30px;
+    background:#2c3e50;
+    border-radius:8px;
+    box-shadow:0 4px 8px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction:column;
+    gap:25px;
+    margin: 20px auto;
+}
+
+.response-form-title{
+    font-size:32px;
+    font-weight: 600;
+    text-align:center;
+    color:#ffffff;
+    margin-top:0;
+    margin-bottom: 20px;
+}
+
+.response-form-area{
+    display:flex;
+    flex-direction: column;
+    gap:20px;
+}
+
+.response-zone{
+    padding:20px;
+    background:#34495e;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border:1px solid #415b76;
+}
+
+.response-question-title{
+    font-size:20px;
+    font-weight: 500;
+    color:#ecf0f1;
+    margin-top:0;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+.response-field{
+    position:static;
+    padding:0;
+    width:100%;
+    margin:15px 0;
+}
+
+.response-input{
+    width:100%;
+    padding:10px 0;
+    font-size:16px;
+    background-color: transparent;
+    border:none;
+    border-bottom: 2px solid #7f8c8d;
+    color:#ecf0f1;
+    outline:none;
+    box-sizing:border-box;
+}
+
+.response-input:focus{
+    border-bottom-color: #3498db;
+}
+
+.correct-answer{
+    background-color: #d4edda;
+    color:#155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+    padding: 8px;
+    margin-bottom: 5px;
+}
+
+.incorrect-answer{
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px soild #f5c6cb;
+    border-radius: 5px;
+    padding: 8px;
+    margin-bottom: 5px;
+}
+
+.response-options-item input[type="radio"]:disabled + label{
+    cursor: default;
+}
+
+.response-field input:disabled,
+.response-field select:disabled,
+.response-field textarea:disabled{
+    background-color: #e9ecef;
+    color: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.field.radio-field{
+    position: static;
+    padding: 15px 0;
+    width:100%;
+    margin:0;
+    box-shadow:none;
+    background-color:transparent;
+    display:flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+.radio-field>.removeButton{
+    position:absolute;
+    top:10px;
+    right:8px;
+    z-index:1;
+}
+
+.options-container{
+    display: flex;
+    flex-direction: column;
+    gap:8px;
+    width:100%;
+}
+
+.option-item{
+    display:flex;
+    align-items: center;
+    gap:8px;
+    width:100%;
+}
+
+.option-item input[type="text"]{
+    flex-grow:1;
+    padding:8px 10px;
+    border:1px solid #555;
+    border-radius:4px;
+    background-color: #3e5771;
+    color:#ecf0f1;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.option-item input[type="text"]:focus{
+    border-color:#3498db;
+}
+
+.remove-option-button{
+    background: none;
+    border:none;
+    color:#95a5a6;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 4px;
+    line-height: 1;
+    border-radius: 50%;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.remove-option-button:hover {
+    color: #ff6a6a;
+    background-color: rgba(255, 106, 106, 0.2);
+}
+
+.add-option-button{
+    background-color: #556c84;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    align-self: flex-start;
+}
+
+.add-option-button:hover{
+    background-color: #627d98;
+}
+
+.add-option-button:active {
+     background-color: #556c84;
+     transform: translateY(1px);
+}
+
+.response-field{
+    margin-bottom: 15px;
+    padding:0 15px;
+}
+
+.response-options-container {
+    display:flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+.response-options-item{
+    display:flex;
+    align-items: center;
+    gap:8px;
+}
+
+.repsonse-radio-input{
+    cursor:pointer;
+    margin:0;
+    width:16px;
+    height: 16px;
+    flex-shrink: 0;
+    accent-color:#3498db;
+}
+
+#submitResponseButton{
+    margin-top:20px;
+    align-self:center;
+    padding:15px 30px;
+    font-size:18px;
+}
