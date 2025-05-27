@@ -1,4 +1,26 @@
 import { handleDrop } from './dragAndDropHandlers.js';
+import { asyncFilter } from '../../utils/asyncArray.js';
+
+const abortController = new AbortController();
+
+export async function removeFieldsByType(zone, typeToRemove) {
+    try {
+        zone.fields = await asyncFilter(
+            zone.fields,
+            async (field) => {
+                await new Promise(res => setTimeout(res, 10));
+                return field.type !== typeToRemove;
+            },
+            abortController.signal
+        );
+    } catch (e) {
+        if (e.name === 'AbortError') {
+            console.warn('Filtering aborted');
+        } else {
+            throw e;
+        }
+    }
+}
 
 export function createFormZone(formZones, formArea) {
     const dropZone = document.createElement('div');
