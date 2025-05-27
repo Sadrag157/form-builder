@@ -1,3 +1,5 @@
+import { exportFormAsync } from '../../utils/asyncFormExporter.js';
+
 export function setupAddZoneButton(callback) {
     const button = document.getElementById('addFormZoneButton');
     if (button) {
@@ -57,4 +59,10 @@ export function collectFormStructure(formArea) {
     });
 
     return formStructure;
+}
+
+export async function saveFormAsync(formStructure) {
+    const json = JSON.stringify(formStructure);
+    localStorage.setItem('exportedForm', json);
+    console.log("Form saved to localStorage:", formStructure);
 }

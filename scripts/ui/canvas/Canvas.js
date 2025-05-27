@@ -1,6 +1,5 @@
-import { setupAddZoneButton } from './formUtils.js';
+import { setupAddZoneButton, collectFormStructure, saveFormAsync } from './formUtils.js';
 import { createFormZone } from './formZoneHandlers.js';
-import { collectFormStructure } from './formUtils.js';
 
 class Canvas {
     constructor() {
@@ -13,13 +12,13 @@ class Canvas {
         setupAddZoneButton(() => this.addFormZone());
     }
 
-    saveForm() {
+    async saveForm() {
         const formStructure = collectFormStructure(this.formArea);
         try {
-            localStorage.setItem('savedFormData', JSON.stringify(formStructure));
-            console.log('Form saved successfully:', formStructure);
+            await saveFormAsync(formStructure);
+            console.log('Form saved asynchronously:', formStructure);
         } catch (e) {
-            console.error('Error saving form to localStorage', e);
+            console.error('Error saving form asynchronously', e);
         }
     }
 

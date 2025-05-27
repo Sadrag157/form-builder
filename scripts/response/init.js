@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    const savedFormString = localStorage.getItem('savedFormData');
+    const savedFormString = localStorage.getItem('exportedForm');
     if (!savedFormString) {
         showErrorUI('No form data found. Please build and save a form first');
         return;

@@ -1,6 +1,5 @@
 export function setupSubmitHandler(formStructure, formContainer, submitBtn) {
     const correctAnswers = {};
-    const abortController = new AbortController();
 
     formStructure.zones?.forEach((zone, zoneIndex) => {
         zone.fields?.forEach((field, fieldIndex) => {
