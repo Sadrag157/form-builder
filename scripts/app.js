@@ -23,4 +23,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }else{
         console.error("button 'ResponseButton' not found");
     }
+
+    const generateLargeFormButton = document.getElementById('FormGenerator');
+    if (generateLargeFormButton) {
+        generateLargeFormButton.addEventListener('click', async () => {
+            console.log("[App.js] 'Generate Large Form' button clicked.");
+            if (!canvas || typeof canvas.generateAndAddLargeForm !== 'function') {
+                console.error("Generate button: Canvas instance or generateAndAddLargeForm method is not available.");
+                generateLargeFormButton.disabled = false;
+                return;
+            }
+            
+            generateLargeFormButton.disabled = true;
+            
+            await canvas.generateAndAddLargeForm(1000); 
+
+            generateLargeFormButton.disabled = false;
+        });
+    } else {
+        console.error("Button 'FormGenerator' not found");
+    }
 });

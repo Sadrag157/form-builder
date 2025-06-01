@@ -22,7 +22,11 @@ export async function removeFieldsByType(zone, typeToRemove) {
     }
 }
 
-export function createFormZone(formZones, formArea) {
+export function createFormZone(formZones, formArea, questionTitleText) {
+    if (!formArea || typeof formArea.appendChild !== 'function') {
+        return undefined; 
+    }
+
     const dropZone = document.createElement('div');
     dropZone.className = 'drop-zone';
 
@@ -30,6 +34,7 @@ export function createFormZone(formZones, formArea) {
     questionInput.type = 'text';
     questionInput.placeholder = 'Question title';
     questionInput.className = 'question-title';
+    questionInput.value = questionTitleText || `Question ${formZonesArray.length + 1}`;
     dropZone.appendChild(questionInput);
 
     const placeholder = document.createElement('p');
@@ -56,9 +61,18 @@ export function createFormZone(formZones, formArea) {
         dropZone.classList.remove('highlight');
     });
 
-    dropZone.addEventListener('drop', e => handleDrop(e, dropZone));
+    if (typeof handleDrop === 'function') {
+        dropZone.addEventListener('drop', e => handleDrop(e, dropZone));
+    } else {
+        console.warn('[createFormZone] handleDrop is not a function. Drag and drop will not work for fields.');
+    }
+    
+    try {
+        formArea.appendChild(dropZone);
+    } catch (e) {
+        console.error("[createFormZone] CRITICAL: Error appending dropZone to formArea:", e);
+        return undefined; 
+    }
 
-    formArea.appendChild(dropZone);
-
-    return { dropZone };
+    return dropZone;
 }

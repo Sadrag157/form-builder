@@ -1,14 +1,3 @@
-import { exportFormAsync } from '../../utils/asyncFormExporter.js';
-
-export function setupAddZoneButton(callback) {
-    const button = document.getElementById('addFormZoneButton');
-    if (button) {
-        button.addEventListener('click', callback);
-    } else {
-        console.error("Button 'addFormZoneButton' not found");
-    }
-}
-
 export function collectFormStructure(formArea) {
     const formTitleInput = document.querySelector('.form-title-input');
     const formTitle = formTitleInput ? formTitleInput.value : 'Untitled Form';
@@ -61,8 +50,68 @@ export function collectFormStructure(formArea) {
     return formStructure;
 }
 
+export async function* streamableZoneDataIterator(formArea) {
+    const dropZones = formArea.querySelectorAll('.drop-zone');
+    let zoneIndex = 0;
+
+    for (const dropZone of dropZones) {
+        const questionInput = dropZone.querySelector('.question-title');
+        const questionTitle = questionInput ? questionInput.value : `Untitled Question ${zoneIndex + 1}`;
+        const zoneId = dropZone.dataset.id || `zone-dom-${zoneIndex}`;
+
+        const zoneData = {
+            id: zoneId,
+            question: questionTitle,
+            fields: []
+        };
+
+        const fieldElements = dropZone.querySelectorAll('.field.field-container-builder');
+        for (const fieldElement of fieldElements) {
+            const fieldType = fieldElement.dataset.fieldType;
+            const fieldDataId = fieldElement.dataset.fieldId;
+
+            if (fieldType === 'radio') {
+                const options = [];
+                const optionItems = fieldElement.querySelectorAll('.option-item');
+                optionItems.forEach(item => {
+                    const textInput = item.querySelector('.option-text-input');
+                    const correctMarker = item.querySelector(`input[type="radio"][name="field_correct_option_${fieldDataId}"]`);
+                    const optionId = item.dataset.optionId;
+
+                    if (textInput && correctMarker && optionId) {
+                        options.push({
+                            id: optionId,
+                            text: textInput.value,
+                            value: optionId,
+                            isCorrect: correctMarker.checked
+                        });
+                    }
+                });
+
+                if (options.length > 0) {
+                    zoneData.fields.push({
+                        id: fieldDataId,
+                        type: 'radio',
+                        options: options
+                    });
+                }
+            }
+        }
+
+        if (zoneData.fields.length > 0) {
+            await new Promise(resolve => setTimeout(resolve, 0));
+            yield zoneData;
+        }
+        zoneIndex++;
+    }
+}
+
 export async function saveFormAsync(formStructure) {
-    const json = JSON.stringify(formStructure);
-    localStorage.setItem('exportedForm', json);
-    console.log("Form saved to localStorage:", formStructure);
+    try {
+        const json = JSON.stringify(formStructure);
+        localStorage.setItem('exportedForm', json);
+        console.log('Form saved:', formStructure);
+    } catch (e) {
+        console.error('Error saving form:', e);
+    }
 }
