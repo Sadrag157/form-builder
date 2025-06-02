@@ -1,3 +1,5 @@
+import  { AsyncArray } from '../utils/asyncArray.js'
+
 export function setupSubmitHandler(formStructure, formContainer, submitBtn) {
     const correctAnswers = {};
 
@@ -36,15 +38,14 @@ export function setupSubmitHandler(formStructure, formContainer, submitBtn) {
 }
 
 async function checkAnswersAsync(formContainer, correctAnswers, submitBtn) {
-    const allOptionElements = formContainer.querySelectorAll('.response-options-item');
+    const allOptionElements = Array.from(formContainer.querySelectorAll('.response-options-item'));
 
-    for(const optionEl of allOptionElements) {
-
+    await AsyncArray.asyncMapPromise(allOptionElements, async(optionEl) => {
         await new Promise(resolve => setTimeout(resolve, 200));
 
         optionEl.classList.remove('correct-answer', 'incorrect-answer');
         const radio = optionEl.querySelector('input[type="radio"]');
-        if (!radio) continue;
+        if (!radio) return;
 
         const groupName = radio.name;
         const selected = radio.checked;
@@ -59,7 +60,7 @@ async function checkAnswersAsync(formContainer, correctAnswers, submitBtn) {
             optionEl.classList.add('correct-answer');
         }
         radio.disabled = true;
-    }
+    });
     submitBtn.disabled = true;
     submitBtn.textContent = 'Submitted';
 }
