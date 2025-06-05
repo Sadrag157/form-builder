@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Builder</title>
     <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="app">
@@ -18,6 +19,24 @@
             </div>
             <div class="sidebar-separator"></div>
             <div id="sidebarItemsContainer" class="sidebar-items-list"></div>
+            <div class="auth-container">
+                <button id="signInButton" class="sidebar-button signin-button">
+                    <i class="fab fa-google"></i> Sign In with Google
+                </button>
+                
+                <div id="userProfile" class="user-profile" style="display: none;">
+                    <div class="user-info" id="userInfo">
+                        <img id="userAvatar" class="user-avatar">
+                        <span id="userEmail" class="user-email"></span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="user-menu">
+                        <button id="signOutButton" class="sidebar-button signout-button">
+                            <i class="fas fa-sign-out-alt"></i> Sign Out
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="form-area" id="formArea">
             <div class="form-title-container">

@@ -1,4 +1,5 @@
-import  { AsyncArray } from '../utils/asyncArray.js'
+import  { AsyncArray } from '../utils/asyncArray.js';
+import { AuthProxy } from '../utils/authProxy.js';
 
 export function setupSubmitHandler(formStructure, formContainer, submitBtn) {
     const correctAnswers = {};
@@ -24,6 +25,16 @@ export function setupSubmitHandler(formStructure, formContainer, submitBtn) {
         try {
             await new Promise(resolve => setTimeout(resolve, 500));
             await checkAnswersAsync(formContainer, correctAnswers, submitBtn);
+
+            const apiProxy = new AuthProxy('https://firestore.googleapis.com/v1/projects/formbuilder-a2ebf/databases/(default)/documents', {
+                type: 'jwt'
+            });
+      
+            const submissionData = {
+                formId: localStorage.getItem('lastSavedFormId'),
+                answers: collectAnswers(formContainer)
+            };
+            await apiProxy.post('/submit', submissionData);
             submitBtn.textContent = 'Submitted';
         } catch (err) {
             if (err.name === 'AbortError') {
@@ -63,4 +74,24 @@ async function checkAnswersAsync(formContainer, correctAnswers, submitBtn) {
     });
     submitBtn.disabled = true;
     submitBtn.textContent = 'Submitted';
+}
+
+function collectAnswers(formContainer) {
+    const answers = {};
+    
+    formContainer.querySelectorAll('.response-options-item').forEach(option => {
+        const radio = option.querySelector('input[type="radio"]');
+        if (!radio) return;
+        
+        if (!answers[radio.name]) {
+            answers[radio.name] = [];
+        }
+        
+        answers[radio.name].push({
+            optionId: option.dataset.optionId,
+            selected: radio.checked
+        });
+    });
+    
+    return answers;
 }

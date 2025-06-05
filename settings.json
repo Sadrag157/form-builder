@@ -1,0 +1,20 @@
+{
+    "liveServer.settings.port": 5500,
+    "liveServer.settings.CustomHeaders": [
+        {
+            "enable": true,
+            "name": "Cross-Origin-Opener-Policy",
+            "value": "same-origin"
+        },
+        {
+            "enable": true,
+            "name": "Cross-Origin-Embedder-Policy",
+            "value": "require-corp"
+        },
+        {
+            "enable": true,
+            "name": "Access-Control-Allow-Origin",
+            "value": "*"
+        }
+    ]
+}

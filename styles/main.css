@@ -330,4 +330,138 @@ body {
     transform: scale(1.1);
 }
 
+.signin-button {
+    background-color: #4285f4;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
 
+.signin-button:hover {
+    background-color: #3367d6;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.signin-button:active {
+    transform: translateY(0);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    gap: 10px;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fff;
+}
+
+.user-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.signout-button {
+    background-color: #f44336;
+    color: white;
+    margin-top: 10px;
+}
+
+.signout-button:hover {
+    background-color: #d32f2f;
+}
+
+.auth-container {
+    margin-top: auto;
+    padding: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-profile {
+    position: relative;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.user-info:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fff;
+}
+
+.user-email {
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 150px;
+}
+
+.user-menu {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #2c2c2c;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    transform: translateY(10px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.user-profile:hover .user-menu {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.signout-button {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    text-align: left;
+    padding: 10px 15px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background-color 0.3s;
+}
+
+.signout-button:hover {
+    background-color: #f44336;
+}
